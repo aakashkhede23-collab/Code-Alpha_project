@@ -2,25 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>BlueKart | E-Commerce Website</title>
+<title>ShopEase | E-Commerce</title>
 
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:"Segoe UI",Arial,sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body{
-  background:#f1f5f9;
-  color:#1f2937;
+  background:#f3f4f6;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
-  background:linear-gradient(90deg,#2563eb,#1d4ed8);
-  padding:14px 30px;
+  background:#2563eb;
+  padding:15px 30px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -33,169 +32,125 @@ header{
 }
 
 .search{
-  width:40%;
+  width:45%;
 }
 .search input{
   width:100%;
-  padding:9px;
+  padding:10px;
   border:none;
   border-radius:4px;
   outline:none;
 }
 
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-
-.cart{
+.login{
   cursor:pointer;
   font-weight:bold;
 }
 
-.login-btn{
-  background:white;
-  color:#2563eb;
-  padding:6px 12px;
-  border-radius:4px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* ===== HERO ===== */
+/* HERO */
 .hero{
-  background:linear-gradient(135deg,#dbeafe,#eff6ff);
-  padding:45px 30px;
+  background:#e0e7ff;
+  padding:40px 30px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 }
-
-.hero-text h1{
-  font-size:38px;
+.hero h1{
+  font-size:36px;
   color:#1e3a8a;
 }
-.hero-text p{
-  margin-top:10px;
-  color:#475569;
-}
-.hero-offer{
-  font-size:42px;
-  color:#2563eb;
+.hero span{
+  font-size:44px;
   font-weight:bold;
+  color:#2563eb;
 }
 
-/* ===== PRODUCTS ===== */
+/* PRODUCTS */
 .container{
-  padding:35px;
+  padding:30px;
 }
-
 .title{
   font-size:24px;
   margin-bottom:20px;
-  color:#1e40af;
 }
-
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:22px;
+  gap:20px;
 }
-
 .card{
   background:white;
-  border-radius:14px;
   padding:15px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.12);
-  transition:0.35s;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  transition:0.3s;
 }
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 18px 40px rgba(37,99,235,0.25);
+  transform:translateY(-6px);
 }
-
 .image{
-  height:180px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
-  border-radius:12px;
+  height:160px;
+  background:#eef2ff;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:42px;
+  font-size:48px;
 }
-
 .card h3{
   font-size:15px;
-  margin:12px 0 6px;
+  margin:10px 0;
 }
-
 .price{
   color:#16a34a;
   font-weight:bold;
   margin-bottom:10px;
 }
-
 button{
   width:100%;
-  padding:9px;
-  background:linear-gradient(90deg,#2563eb,#1d4ed8);
+  padding:8px;
+  background:#2563eb;
   border:none;
-  border-radius:6px;
   color:white;
-  font-weight:bold;
+  border-radius:6px;
   cursor:pointer;
 }
 
-/* ===== LOGIN MODAL ===== */
-.modal{
+/* LOGIN POPUP */
+#loginBox{
+  display:none;
   position:fixed;
   top:0; left:0;
   width:100%; height:100%;
   background:rgba(0,0,0,0.5);
-  display:none;
-  align-items:center;
-  justify-content:center;
 }
-
-.modal-box{
+.login-card{
   background:white;
+  width:350px;
   padding:25px;
-  width:300px;
+  margin:120px auto;
   border-radius:10px;
+  position:relative;
 }
-
-.modal-box h2{
-  text-align:center;
-  margin-bottom:15px;
-  color:#2563eb;
-}
-
-.modal-box input{
+.login-card input{
   width:100%;
-  padding:8px;
-  margin-bottom:10px;
+  padding:10px;
+  margin-bottom:12px;
 }
-
-.modal-box button{
-  margin-top:5px;
-}
-
-.modal-box p{
-  text-align:center;
-  margin-top:10px;
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
   cursor:pointer;
-  color:#2563eb;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   background:#1e3a8a;
+  color:white;
   text-align:center;
-  padding:16px;
-  margin-top:45px;
-  color:#e0f2fe;
+  padding:15px;
+  margin-top:40px;
 }
 </style>
 </head>
@@ -203,90 +158,122 @@ footer{
 <body>
 
 <header>
-  <div class="logo">BlueKart</div>
+  <div class="logo">ShopEase</div>
+
   <div class="search">
-    <input type="text" placeholder="Search products, brands & more">
+    <input id="searchInput" type="text"
+      placeholder="Search products"
+      onkeyup="searchProduct()">
   </div>
-  <div class="header-right">
-    <div class="cart">🛒 Cart (<span id="cartCount">0</span>)</div>
-    <div class="login-btn" onclick="openLogin()">Login</div>
-  </div>
+
+  <div class="login" onclick="openLogin()">Login / Signup</div>
 </header>
 
 <section class="hero">
-  <div class="hero-text">
-    <h1>Shop Smart, Live Better</h1>
-    <p>Electronics • Fashion • Lifestyle</p>
-  </div>
-  <div class="hero-offer">50% OFF</div>
+  <h1>Best Deals For You</h1>
+  <span>50% OFF</span>
 </section>
 
 <div class="container">
-  <div class="title">Top Deals For You</div>
+  <div class="title">Top Products</div>
 
   <div class="products">
-    <div class="card"><div class="image">📱</div><h3>Smartphone</h3><div class="price">₹14,999</div><button onclick="addToCart()">Add to Cart</button></div>
-    <div class="card"><div class="image">💻</div><h3>Laptop</h3><div class="price">₹54,999</div><button onclick="addToCart()">Add to Cart</button></div>
-    <div class="card"><div class="image">🎧</div><h3>Headphones</h3><div class="price">₹2,999</div><button onclick="addToCart()">Add to Cart</button></div>
-    <div class="card"><div class="image">👟</div><h3>Shoes</h3><div class="price">₹1,999</div><button onclick="addToCart()">Add to Cart</button></div>
+
+    <!-- MOBILES -->
+    <div class="card">
+      <div class="image">📱</div>
+      <h3>Mobile Smartphone Android</h3>
+      <div class="price">₹14,999</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <div class="image">📱</div>
+      <h3>Mobile 5G Smartphone</h3>
+      <div class="price">₹18,999</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <div class="image">📱</div>
+      <h3>Mobile iOS Smartphone</h3>
+      <div class="price">₹69,999</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <!-- LAPTOP -->
+    <div class="card">
+      <div class="image">💻</div>
+      <h3>Laptop Gaming Laptop</h3>
+      <div class="price">₹55,999</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <!-- ACCESSORIES -->
+    <div class="card">
+      <div class="image">🎧</div>
+      <h3>Headphones Wireless Bluetooth</h3>
+      <div class="price">₹2,499</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <div class="image">👟</div>
+      <h3>Shoes Sports Running</h3>
+      <div class="price">₹1,999</div>
+      <button>Add to Cart</button>
+    </div>
+
   </div>
 </div>
 
 <footer>
-  © 2025 BlueKart — Stylish Online Shopping Website
+  © 2025 ShopEase — E-Commerce Website
 </footer>
 
-<!-- LOGIN / SIGNUP MODAL -->
-<div class="modal" id="authModal">
-  <div class="modal-box">
-    <h2 id="authTitle">Login</h2>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="submitAuth()">Submit</button>
-    <p onclick="toggleAuth()">Switch to Signup</p>
+<!-- LOGIN POPUP -->
+<div id="loginBox">
+  <div class="login-card">
+    <span class="close" onclick="closeLogin()">❌</span>
+    <h2 style="text-align:center;margin-bottom:15px;">Login</h2>
+
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="loginUser()">Login</button>
+
+    <p style="text-align:center;margin-top:10px;font-size:14px;">
+      Demo: test@test.com / 1234
+    </p>
   </div>
 </div>
 
 <script>
-let cart=0;
-function addToCart(){
-  if(!localStorage.getItem("user")){
-    alert("Please login first");
-    return;
-  }
-  cart++;
-  document.getElementById("cartCount").innerText=cart;
-}
+function searchProduct(){
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
 
-/* LOGIN SYSTEM */
-let isLogin=true;
+  cards.forEach(card=>{
+    let text = card.innerText.toLowerCase();
+    card.style.display = text.includes(input) ? "block" : "none";
+  });
+}
 
 function openLogin(){
-  document.getElementById("authModal").style.display="flex";
+  document.getElementById("loginBox").style.display="block";
 }
-
-function toggleAuth(){
-  isLogin=!isLogin;
-  document.getElementById("authTitle").innerText=isLogin?"Login":"Signup";
+function closeLogin(){
+  document.getElementById("loginBox").style.display="none";
 }
-
-function submitAuth(){
+function loginUser(){
   let email=document.getElementById("email").value;
-  let password=document.getElementById("password").value;
+  let pass=document.getElementById("password").value;
 
-  if(isLogin){
-    let user=JSON.parse(localStorage.getItem("user"));
-    if(user && user.email===email && user.password===password){
-      alert("Login successful");
-      document.getElementById("authModal").style.display="none";
-    }else{
-      alert("Invalid credentials");
-    }
+  if(email==="test@test.com" && pass==="1234"){
+    alert("Login Successful!");
+    closeLogin();
   }else{
-    localStorage.setItem("user",JSON.stringify({email,password}));
-    alert("Signup successful");
-    isLogin=true;
-    document.getElementById("authTitle").innerText="Login";
+    alert("Invalid Login!");
   }
 }
 </script>
