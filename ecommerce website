@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ShopEase – Full Product Details</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
 body{background:#f1f3f6}
@@ -72,7 +73,6 @@ header button{
   padding:30px;
 }
 .info{padding:30px;width:55%}
-.info h2{margin-bottom:10px}
 .rating{color:#ff9f00;font-weight:600}
 ul{margin:15px 0 15px 20px}
 .specs{
@@ -85,7 +85,6 @@ ul{margin:15px 0 15px 20px}
   padding:8px;
 }
 .specs td:first-child{font-weight:600;background:#f5f5f5}
-
 .buy{
   display:flex;
   gap:15px;
@@ -188,19 +187,8 @@ const products = [
  price:79999,
  rating:"4.6 ★",
  img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
- highlights:[
-  "128 GB ROM",
-  "A18 Bionic Chip",
-  "48MP + 12MP Camera",
-  "iOS 18"
- ],
- specs:{
-  Brand:"Apple",
-  Model:"iPhone 16 Plus",
-  Display:"6.7 inch OLED",
-  Battery:"4500 mAh",
-  OS:"iOS 18"
- }
+ highlights:["128 GB ROM","A18 Bionic Chip","48MP Camera","iOS 18"],
+ specs:{Brand:"Apple",Display:"6.7 inch OLED"}
 },
 {
  id:2,
@@ -208,46 +196,80 @@ const products = [
  price:54999,
  rating:"4.5 ★",
  img:"https://images.unsplash.com/photo-1598327105666-5b89351aff97",
- highlights:[
-  "Snapdragon Processor",
-  "120Hz AMOLED Display",
-  "50MP Camera",
-  "5G Supported"
- ],
- specs:{
-  Brand:"Samsung",
-  Model:"Galaxy S24",
-  Display:"6.2 inch AMOLED",
-  Battery:"4000 mAh",
-  OS:"Android 14"
- }
+ highlights:["120Hz AMOLED","Snapdragon","50MP Camera"],
+ specs:{Brand:"Samsung",OS:"Android 14"}
+},
+{
+ id:3,
+ title:"Dell SE2225HM 22 inch Monitor",
+ price:6599,
+ rating:"4.3 ★",
+ img:"https://priyacomputers.in/wp-content/uploads/2025/06/se2225hm.jpg",
+ highlights:["22 Inch Full HD","VA Panel","HDMI + VGA"],
+ specs:{Brand:"Dell",Display:"22 inch"}
+},
+{
+ id:4,
+ title:"Kadio Analog Wall Clock",
+ price:239,
+ rating:"4.0 ★",
+ img:"https://rukminim2.flixcart.com/image/480/640/xif0q/wall-clock/9/e/m/403-20-403white-analog-kadio-20-original-imahdmz8bz5fbgz4.jpeg",
+ highlights:["20 cm Size","Glass Cover","Silent Movement"],
+ specs:{Brand:"Kadio",Type:"Analog"}
+},
+{
+ id:5,
+ title:"ASUS Vivobook Go 15",
+ price:39990,
+ rating:"4.3 ★",
+ img:"https://m.media-amazon.com/images/I/61b8t5VmccL._AC_UF894,1000_QL80_.jpg",
+ highlights:["Intel i3","8GB RAM","512GB SSD","Windows 11"],
+ specs:{Brand:"ASUS",Display:"15.6 inch"}
+},
+{
+ id:6,
+ title:"Lenovo 100e Chromebook Gen 4",
+ price:13990,
+ rating:"4.2 ★",
+ img:"https://m.media-amazon.com/images/I/5144IrvRGfL.jpg",
+ highlights:["Chrome OS","4GB RAM","Student Laptop"],
+ specs:{Brand:"Lenovo",OS:"Chrome OS"}
+},
+{
+ id:7,
+ title:"POCO C71 (64GB)",
+ price:6699,
+ rating:"4.5 ★",
+ img:"https://i02.appmifile.com/mi-com-product/fly-birds/poco-c71/pc/9b5ef9b4.jpg",
+ highlights:["6.88 inch Display","5200mAh Battery","64GB Storage"],
+ specs:{Brand:"POCO",OS:"Android"}
 }
 ];
 
-let cart=[];
+let cart = [];
 
 function showView(v){
  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
  document.getElementById(v).classList.add('active');
- if(v==="cart")renderCart();
+ if(v==="cart") renderCart();
 }
 
 function renderProducts(){
- const list=document.getElementById("productList");
+ const list = document.getElementById("productList");
  list.innerHTML="";
  products.forEach(p=>{
-  list.innerHTML+=`
-  <div class="card">
-   <img src="${p.img}">
-   <h3>${p.title}</h3>
-   <div class="price">₹${p.price}</div>
-   <button onclick="viewDetails(${p.id})">View Details</button>
-  </div>`;
+  list.innerHTML += `
+   <div class="card">
+    <img src="${p.img}">
+    <h3>${p.title}</h3>
+    <div class="price">₹${p.price}</div>
+    <button onclick="viewDetails(${p.id})">View Details</button>
+   </div>`;
  });
 }
 
 function viewDetails(id){
- const p=products.find(x=>x.id===id);
+ const p = products.find(x=>x.id===id);
  let specRows="";
  for(let k in p.specs){
   specRows+=`<tr><td>${k}</td><td>${p.specs[k]}</td></tr>`;
@@ -259,13 +281,8 @@ function viewDetails(id){
    <h2>${p.title}</h2>
    <div class="rating">${p.rating}</div>
    <h3 class="price">₹${p.price}</h3>
-
-   <h4>Highlights</h4>
    <ul>${p.highlights.map(h=>`<li>${h}</li>`).join("")}</ul>
-
-   <h4>Specifications</h4>
    <table class="specs">${specRows}</table>
-
    <div class="buy">
     <button class="cartBtn" onclick="addToCart(${p.id})">Add to Cart</button>
     <button class="buyBtn" onclick="alert('Order Placed (Demo)')">Buy Now</button>
@@ -277,18 +294,22 @@ function viewDetails(id){
 
 function addToCart(id){
  cart.push(products.find(x=>x.id===id));
- document.getElementById("count").innerText=cart.length;
+ document.getElementById("count").innerText = cart.length;
  alert("Added to Cart");
 }
 
 function renderCart(){
- const box=document.getElementById("cartItems");
- box.innerHTML=cart.length===0?"Cart is empty":
- cart.map(p=>`<p>${p.title} – ₹${p.price}</p>`).join("");
+ const box = document.getElementById("cartItems");
+ box.innerHTML = cart.length===0 ? "Cart is empty"
+ : cart.map(p=>`<p>${p.title} – ₹${p.price}</p>`).join("");
 }
 
-function openLogin(){document.getElementById("login").style.display="flex"}
-function closeLogin(){document.getElementById("login").style.display="none"}
+function openLogin(){
+ document.getElementById("login").style.display="flex";
+}
+function closeLogin(){
+ document.getElementById("login").style.display="none";
+}
 
 renderProducts();
 </script>
