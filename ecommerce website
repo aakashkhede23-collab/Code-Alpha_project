@@ -234,15 +234,6 @@ const products = [
  img:"https://m.media-amazon.com/images/I/5144IrvRGfL.jpg",
  highlights:["Chrome OS","4GB RAM","Student Laptop"],
  specs:{Brand:"Lenovo",OS:"Chrome OS"}
-},
-{
- id:7,
- title:"POCO C71 (64GB)",
- price:6699,
- rating:"4.5 ★",
- img:"https://i02.appmifile.com/mi-com-product/fly-birds/poco-c71/pc/9b5ef9b4.jpg",
- highlights:["6.88 inch Display","5200mAh Battery","64GB Storage"],
- specs:{Brand:"POCO",OS:"Android"}
 }
 ];
 
